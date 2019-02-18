@@ -13,6 +13,17 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 import django_heroku
+from dotenv import load_dotenv
+
+load_dotenv()
+
+def get_env(variable_name):
+    value = os.getenv(variable_name)
+    if value is None:
+        raise ValueError(f"{variable_name} is not presented in environment variables. Check your .env file")
+    if str(value).lower() in ("true", "false"):
+        return str(value).lower() == "true"
+    return value
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -121,11 +132,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-EMAIL_USE_TLS = False
-EMAIL_HOST = None
-EMAIL_HOST_USER = None
-EMAIL_HOST_PASSWORD = None
-EMAIL_PORT = None
+EMAIL_USE_TLS = get_env("EMAIL_USE_TLS")
+EMAIL_HOST = get_env("EMAIL_HOST")
+EMAIL_HOST_USER = get_env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = get_env("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = get_env("EMAIL_PORT")
 
 django_heroku.settings(locals())
 
