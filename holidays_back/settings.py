@@ -133,7 +133,7 @@ EMAIL_PORT = int(os.getenv("EMAIL_PORT", 0))
 DATE_PRICE = os.getenv("DATE_PRICE")
 DATE_ALERT = os.getenv("DATE_ALERT")
 
-GIF_THEMES = ast.literal_eval(os.getenv("GIF_THEMES", "[]"))
+GIF_THEMES = os.getenv("GIF_THEMES").split(',')
 
 django_heroku.settings(locals())
 
