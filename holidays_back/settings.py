@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-
+import ast
 import os
 
 import django_heroku
@@ -129,6 +129,11 @@ EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = int(os.getenv("EMAIL_PORT", 0))
+
+DATE_PRICE = os.getenv("DATE_PRICE")
+DATE_ALERT = os.getenv("DATE_ALERT")
+
+GIF_THEMES = ast.literal_eval(os.getenv("GIF_THEMES", "[]"))
 
 django_heroku.settings(locals())
 
