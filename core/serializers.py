@@ -12,6 +12,6 @@ class EmployeeSerializer(ModelSerializer):
 
     def create(self, validated_data):
         instance = super().create(validated_data)
-        message = RegistrationMessage(instance.fio, instance.is_female)
-        send_mail('Регистрация', str(message), 'zorumnipa@gmail.com', [instance.email], fail_silently=True)
+        message = RegistrationMessage(instance.fio)
+        send_mail('Регистрация', str(message), 'zorumnipa@gmail.com', [instance.email], fail_silently=False)
         return instance
